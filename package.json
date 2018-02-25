@@ -1,0 +1,59 @@
+{
+  "name": "react-webpack-boilerplate",
+  "version": "1.0.0",
+  "description": "Starter boilerplate for React SPAs using Webpack 3 and Express.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config=config/webpack.dev.js",
+    "dev": "nodemon --inspect --watch config --watch src/server src/server/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/melanieseltzer/react-webpack-boilerplate.git"
+  },
+  "keywords": [
+    "react",
+    "webpack",
+    "express",
+    "pug",
+    "ejs",
+    "handlebars",
+    "hmr",
+    "boilerplate"
+  ],
+  "author": "Melanie Seltzer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melanieseltzer/react-webpack-boilerplate/issues"
+  },
+  "homepage": "https://github.com/melanieseltzer/react-webpack-boilerplate#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.10",
+    "ejs-loader": "^0.3.0",
+    "extract-loader": "^1.0.2",
+    "file-loader": "^1.1.9",
+    "handlebars": "^4.0.11",
+    "handlebars-loader": "^1.6.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^2.30.1",
+    "nodemon": "^1.15.1",
+    "pug": "^2.0.0-rc.4",
+    "pug-loader": "^2.3.0",
+    "style-loader": "^0.20.2",
+    "webpack": "^3.11.0",
+    "webpack-dev-middleware": "^2.0.6",
+    "webpack-dev-server": "^2.11.1",
+    "webpack-hot-middleware": "^2.21.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-hot-loader": "^3.1.3"
+  }
+}
