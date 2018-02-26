@@ -4,11 +4,18 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
-    main: ['./src/index.js']
+    main: [
+      'babel-runtime/regenerator',
+      'react-hot-loader/patch',
+      'babel-register',
+      'webpack-hot-middleware/client?reload=true',
+      './src/index.js'
+    ]
   },
   output: {
     filename: 'js/[name]-bundle.js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: "/"
   },
   devServer: {
     contentBase: 'dist',
@@ -26,27 +33,48 @@ module.exports = {
     rules: [
       {
         // Transpile JavaScript files using Babel
-        // Exclude node_modules folder
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
-      },
-      {
-        // Process CSS files
-        // First lint the file (css-loader)
-        // Then inject CSS into the HTML (style-loader)
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [
+          {
+            loader: "babel-loader"
+          }
+        ]
       },
       {
         // Process Sass files
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       },
       {
         // Process image files to the output directory
         // Include hash in the output name
-        test: /\.(jpg|gif|png|svg)$/,
+        test: /\.(jpg|gif|png)$/,
         use: [
           {
             loader: 'file-loader',
@@ -96,10 +124,14 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    }),
     new htmlWebpackPlugin({
       // Template can be vanilla HTML, or preprocessors
       // EJS, Pug or Handlebars (.ejs, .pug, .hbs)
       template: './src/index.pug',
+      inject: true,
       title: 'My App'
     })
   ]
