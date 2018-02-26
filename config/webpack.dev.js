@@ -39,6 +39,11 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
+        // Process Sass files
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+      },
+      {
         // Process image files to the output directory
         // Include hash in the output name
         test: /\.(jpg|gif|png|svg)$/,
