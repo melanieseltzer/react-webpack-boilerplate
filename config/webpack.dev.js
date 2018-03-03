@@ -4,6 +4,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
+    vendor: ['react', 'react-dom'],
     main: [
       'babel-runtime/regenerator',
       'react-hot-loader/patch',
@@ -122,6 +123,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({

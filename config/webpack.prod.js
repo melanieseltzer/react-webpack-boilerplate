@@ -9,11 +9,12 @@ const brotliPlugin = require('brotli-webpack-plugin')
 module.exports = env => {
   return {
     entry: {
+      vendor: ['react', 'react-dom'],
       main: ['./src/index.js']
     },
     output: {
       filename: 'js/[name]-bundle.js',
-      path: path.resolve(__dirname, '../public'),
+      path: path.resolve(__dirname, '../dist'),
       publicPath: "/"
     },
     devServer: {
@@ -111,6 +112,9 @@ module.exports = env => {
       ]
     },
     plugins: [
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor'
+      }),
       new extractTextPlugin('css/[name]-bundle.css'),
       new webpack.NamedModulesPlugin(),
       new webpack.DefinePlugin({
