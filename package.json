@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --inspect --watch config --watch src/server src/server/main.js",
     "build": "NODE_ENV=production webpack --config=config/webpack.prod.js",
-    "prod": "NODE_ENV=production node src/server/main.js"
+    "prod": "NODE_ENV=production node src/server/main.js",
+    "stats": "BABEL_ENV=production webpack --config=config/webpack.prod.js --env.NODE_ENV=production --profile --json > dist/stats.json"
   },
   "repository": {
     "type": "git",
@@ -51,6 +52,7 @@
     "style-loader": "^0.20.2",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^3.11.0",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-dev-middleware": "^2.0.6",
     "webpack-dev-server": "^2.11.1",
     "webpack-hot-middleware": "^2.21.0"
