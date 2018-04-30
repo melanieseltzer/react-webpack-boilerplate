@@ -13,10 +13,11 @@ module.exports = {
       './src/index.js'
     ]
   },
+  mode: 'development',
   output: {
     filename: 'js/[name]-bundle.js',
     path: path.resolve(__dirname, '../dist'),
-    publicPath: "/"
+    publicPath: '/'
   },
   devServer: {
     contentBase: 'dist',
@@ -38,7 +39,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader"
+            loader: 'babel-loader'
           }
         ]
       },
@@ -90,11 +91,7 @@ module.exports = {
         test: /\.html$/,
         use: [
           {
-            loader: 'html-loader',
-            options: {
-              // Target src in the attribute img
-              attrs: ['img:src']
-            }
+            loader: 'html-loader'
           }
         ]
       },
@@ -122,12 +119,21 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+          minChunks: 2
+        }
+      }
+    }
+  },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     }),

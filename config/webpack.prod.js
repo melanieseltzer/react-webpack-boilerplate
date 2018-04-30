@@ -12,6 +12,7 @@ module.exports = env => {
       vendor: ['react', 'react-dom'],
       main: ['./src/index.js']
     },
+    mode: 'production',
     output: {
       filename: 'js/[name]-bundle.js',
       path: path.resolve(__dirname, '../dist'),
@@ -111,12 +112,21 @@ module.exports = env => {
         }
       ]
     },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          default: false,
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            chunks: 'all',
+            minChunks: 2
+          }
+        }
+      }
+    },
     plugins: [
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor'
-      }),
       new extractTextPlugin('css/[name]-bundle.css'),
-      new webpack.NamedModulesPlugin(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
       }),
