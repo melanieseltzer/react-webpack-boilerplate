@@ -14,8 +14,7 @@ A simple starter boilerplate for React apps using Webpack 4 and Express. Ships w
 Clone repo and cd into project directory
 
 ```
-git clone git@github.com:melanieseltzer/react-webpack-boilerplate.git
-cd react-webpack-boilerplate
+git clone git@github.com:melanieseltzer/react-webpack-boilerplate.git && cd react-webpack-boilerplate
 ```
 
 Install dependencies
@@ -52,7 +51,7 @@ Specify which filetype to use for htmlWebpackPlugin in `config/webpack.dev.js` a
 
 ```
 new htmlWebpackPlugin({
-  template: './src/index.[html|ejs|pug|hbs]',
+  template: './src/index.[html|ejs|pug]',
   title: 'My App'
 })
 ```
