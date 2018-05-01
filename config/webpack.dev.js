@@ -15,22 +15,22 @@ module.exports = {
   },
   mode: 'development',
   output: {
-    filename: 'js/[name]-bundle.js',
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/'
+    filename: 'js/[name]-bundle.js'
   },
-  devServer: {
-    contentBase: 'dist',
-    // Overlay errors on browser window
-    overlay: true,
-    // Enable hot reloading
-    hot: true,
-    // Colors in the terminal output
-    stats: {
-      colors: true
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+          minChunks: 2
+        }
+      }
     }
   },
-  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -48,10 +48,7 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader',
-            options: {
-              sourceMap: true
-            }
+            loader: 'style-loader'
           },
           {
             loader: 'css-loader',
@@ -104,33 +101,8 @@ module.exports = {
         // Process Pug
         test: /\.pug$/,
         use: ['pug-loader']
-      },
-      {
-        // Process Handlebars
-        test: /\.hbs$/,
-        use: [
-          {
-            loader: 'handlebars-loader',
-            query: {
-              inlineRequires: '/img/'
-            }
-          }
-        ]
       }
     ]
-  },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        default: false,
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-          minChunks: 2
-        }
-      }
-    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -139,7 +111,7 @@ module.exports = {
     }),
     new htmlWebpackPlugin({
       // Template can be vanilla HTML, or preprocessors
-      // EJS, Pug or Handlebars (.ejs, .pug, .hbs)
+      // EJS or Pug
       template: './src/index.pug',
       inject: true,
       title: 'My App'
