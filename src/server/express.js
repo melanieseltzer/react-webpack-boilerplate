@@ -2,7 +2,7 @@ import express from 'express'
 const server = express()
 import path from 'path'
 
-const isProd = process.env.NODE_ENV === "production"
+const isProd = process.env.NODE_ENV === 'production'
 if (!isProd) {
   const webpack = require('webpack')
   const config = require('../../config/webpack.dev.js')
@@ -28,11 +28,11 @@ if (!isProd) {
   server.use(webpackHotMiddleware)
 }
 
-// Serve from the public folder
+// Serve from the dist folder
 // with gzip compression
 const expressStaticGzip = require('express-static-gzip')
 server.use(
-  expressStaticGzip('public', {
+  expressStaticGzip('dist', {
     enableBrotli: true
   })
 )
